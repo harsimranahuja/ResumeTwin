@@ -11,8 +11,9 @@ const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 const allowedOrigins = [
-  "https://resume-twin.vercel.app",   // Vite dev
-  "https://resume-twin-git-main-harsimranahujas-projects.vercel.app",   // CRA dev
+  "https://resume-twin.vercel.app",   // Production Vercel
+  "http://localhost:5173",            // Local Vite
+  "https://resume-twin-git-main-harsimranahujas-projects.vercel.app",   // Preview
   "https://resume-twin-7vld2pkjw-harsimranahujas-projects.vercel.app"
 ];
 

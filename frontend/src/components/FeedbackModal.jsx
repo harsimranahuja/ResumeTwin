@@ -1,4 +1,5 @@
 import { useState, forwardRef, useImperativeHandle } from 'react';
+import { API_BASE_URL } from '../api';
 import './FeedbackModal.css';
 
 const FeedbackModal = forwardRef(({ user }, ref) => {
@@ -25,7 +26,7 @@ const FeedbackModal = forwardRef(({ user }, ref) => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/feedback', {
+      const response = await fetch(`${API_BASE_URL}/feedback`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

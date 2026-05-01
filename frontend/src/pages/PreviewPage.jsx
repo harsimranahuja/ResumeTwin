@@ -4,6 +4,7 @@ import { useResume } from '../context/ResumeContext';
 import ATSResume from '../components/ATSResume';
 import HRResume from '../components/HRResume';
 import { exportToPdf } from '../utils/exportPdf';
+import { API_BASE_URL } from '../api';
 import './PreviewPage.css';
 
 export default function PreviewPage({ user }) {
@@ -46,7 +47,7 @@ export default function PreviewPage({ user }) {
     // Strip internal _historyId from the data we save
     const { _historyId, ...resumeData } = state;
 
-    fetch('http://localhost:5000/api/history/save', {
+    fetch(`${API_BASE_URL}/history/save`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

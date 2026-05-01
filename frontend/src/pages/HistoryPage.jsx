@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useResume } from '../context/ResumeContext';
+import { API_BASE_URL } from '../api';
 import './HistoryPage.css';
 
 export default function HistoryPage() {
@@ -32,7 +33,7 @@ export default function HistoryPage() {
   const fetchHistory = async (username) => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:5000/api/history/${encodeURIComponent(username)}`);
+      const res = await fetch(`${API_BASE_URL}/history/${encodeURIComponent(username)}`);
       const data = await res.json();
       if (res.ok) {
         setResumes(data.resumes || []);
@@ -64,7 +65,7 @@ export default function HistoryPage() {
     if (!user) return;
     setDeletingId(id);
     try {
-      const res = await fetch(`http://localhost:5000/api/history/${encodeURIComponent(user.username)}/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/history/${encodeURIComponent(user.username)}/${id}`, {
         method: 'DELETE'
       });
       if (res.ok) {
@@ -85,7 +86,7 @@ export default function HistoryPage() {
     if (!user) return;
     setClearing(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/history/${encodeURIComponent(user.username)}`, {
+      const res = await fetch(`${API_BASE_URL}/history/${encodeURIComponent(user.username)}`, {
         method: 'DELETE'
       });
       if (res.ok) {

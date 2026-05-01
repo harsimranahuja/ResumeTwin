@@ -1,0 +1,227 @@
+/* ===== ATS Resume - Clean, parseable, no graphics ===== */
+.ats-resume {
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  padding: 40px 50px;
+  max-width: 800px;
+  min-height: 1123px; /* A4 page height at 96dpi */
+  line-height: 1.5;
+  font-size: 11pt;
+}
+
+.ats-resume h1 {
+  font-family: 'Georgia', serif;
+  font-size: 22pt;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ats-contact {
+  font-size: 10pt;
+  color: #333333;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.ats-contact span {
+  display: inline;
+}
+
+.ats-contact span + span::before {
+  content: ' | ';
+  color: #666;
+}
+
+.ats-section {
+  margin-bottom: 16px;
+}
+
+.ats-section-title {
+  font-family: 'Georgia', serif;
+  font-size: 12pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #000000;
+  border-bottom: 2px solid #000000;
+  padding-bottom: 3px;
+  margin-bottom: 10px;
+}
+
+.ats-summary {
+  font-size: 10.5pt;
+  color: #222;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.ats-entry {
+  margin-bottom: 12px;
+}
+
+.ats-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.ats-entry-title {
+  font-size: 11pt;
+  font-weight: 700;
+  color: #000;
+}
+
+.ats-entry-subtitle {
+  font-size: 10.5pt;
+  font-style: italic;
+  color: #333;
+}
+
+.ats-entry-date {
+  font-size: 10pt;
+  color: #555;
+}
+
+.ats-entry-body {
+  font-size: 10.5pt;
+  color: #222;
+  margin-top: 4px;
+  white-space: pre-line;
+  line-height: 1.5;
+}
+
+.ats-skills-list {
+  font-size: 10.5pt;
+  color: #222;
+  line-height: 1.6;
+}
+
+.ats-cert-list {
+  list-style: disc;
+  padding-left: 20px;
+  font-size: 10.5pt;
+  color: #222;
+}
+
+.ats-cert-list li {
+  margin-bottom: 3px;
+}
+
+.ats-project {
+  margin-bottom: 10px;
+}
+
+.ats-project-title {
+  font-weight: 700;
+  font-size: 11pt;
+}
+
+.ats-project-tech {
+  font-size: 10pt;
+  color: #555;
+  font-style: italic;
+}
+
+.ats-project-desc {
+  font-size: 10.5pt;
+  color: #222;
+  margin-top: 2px;
+  white-space: pre-line;
+}
+
+/* Fit One Page Mode */
+.ats-fit-one-page {
+  padding: 25px 35px;
+  font-size: 9.5pt;
+  line-height: 1.35;
+}
+
+.ats-fit-one-page h1 {
+  font-size: 18pt;
+}
+
+.ats-fit-one-page .ats-section-title {
+  font-size: 11pt;
+  margin-bottom: 6px;
+  padding-bottom: 2px;
+}
+
+.ats-fit-one-page .ats-section {
+  margin-bottom: 10px;
+}
+
+.ats-fit-one-page .ats-entry {
+  margin-bottom: 8px;
+}
+
+.ats-fit-one-page .ats-entry-title {
+  font-size: 10pt;
+}
+
+.ats-fit-one-page .ats-entry-subtitle,
+.ats-fit-one-page .ats-entry-body,
+.ats-fit-one-page .ats-skills-list,
+.ats-fit-one-page .ats-cert-list {
+  font-size: 9.5pt;
+}
+
+/* ===== ATS Templates ===== */
+
+/* Template 1: Default (Georgia, Solid Borders) */
+/* No extra styles needed, it uses the base classes */
+
+/* Template 2: Arial, No Borders, Centered Name */
+.ats-resume.template-2 { font-family: 'Arial', sans-serif; }
+.ats-resume.template-2 h1 { font-family: 'Arial', sans-serif; text-align: center; }
+.ats-resume.template-2 .ats-contact { text-align: center; justify-content: center; display: flex; flex-wrap: wrap; gap: 4px; }
+.ats-resume.template-2 .ats-contact span + span::before { content: ' | '; margin-right: 4px; }
+.ats-resume.template-2 .ats-section-title { border-bottom: none; text-align: center; }
+
+/* Template 3: Roboto, Dashed Borders */
+.ats-resume.template-3 { font-family: 'Roboto', sans-serif; }
+.ats-resume.template-3 h1 { font-family: 'Roboto', sans-serif; }
+.ats-resume.template-3 .ats-section-title { border-bottom: 1px dashed #000; }
+
+/* Template 4: Times New Roman, Double Borders */
+.ats-resume.template-4 { font-family: 'Times New Roman', serif; }
+.ats-resume.template-4 h1 { font-family: 'Times New Roman', serif; }
+.ats-resume.template-4 .ats-section-title { border-bottom: 3px double #000; }
+
+/* Template 5: Garamond, Compact, Centered Headers */
+.ats-resume.template-5 { font-family: 'Garamond', serif; font-size: 10.5pt; }
+.ats-resume.template-5 h1 { font-family: 'Garamond', serif; text-align: center; }
+.ats-resume.template-5 .ats-contact { text-align: center; justify-content: center; display: flex; flex-wrap: wrap; gap: 4px; }
+.ats-resume.template-5 .ats-contact span + span::before { content: ' | '; margin-right: 4px; }
+.ats-resume.template-5 .ats-section-title { border-bottom: 1px solid #000; text-align: center; }
+
+/* Template 6: Helvetica, Thick Borders */
+.ats-resume.template-6 { font-family: 'Helvetica', sans-serif; }
+.ats-resume.template-6 h1 { font-family: 'Helvetica', sans-serif; }
+.ats-resume.template-6 .ats-section-title { border-bottom: 3px solid #000; }
+
+/* Template 7: Trebuchet MS, Right Aligned Name */
+.ats-resume.template-7 { font-family: 'Trebuchet MS', sans-serif; }
+.ats-resume.template-7 h1 { font-family: 'Trebuchet MS', sans-serif; text-align: right; }
+.ats-resume.template-7 .ats-contact { text-align: right; justify-content: flex-end; display: flex; flex-wrap: wrap; gap: 4px; }
+.ats-resume.template-7 .ats-contact span + span::before { content: ' | '; margin-right: 4px; }
+.ats-resume.template-7 .ats-section-title { border-bottom: 1px solid #000; }
+
+/* Template 8: Verdana, Spaced Out */
+.ats-resume.template-8 { font-family: 'Verdana', sans-serif; line-height: 1.7; font-size: 10pt; }
+.ats-resume.template-8 h1 { font-family: 'Verdana', sans-serif; letter-spacing: 2px; }
+.ats-resume.template-8 .ats-section-title { border-bottom: 1px solid #000; letter-spacing: 2px; }
+
+/* Template 9: Tahoma, Minimalist */
+.ats-resume.template-9 { font-family: 'Tahoma', sans-serif; }
+.ats-resume.template-9 h1 { font-family: 'Tahoma', sans-serif; font-weight: normal; }
+.ats-resume.template-9 .ats-section-title { border-bottom: none; border-top: 1px solid #000; padding-top: 5px; }
+
+/* Template 10: Courier New, Typewriter */
+.ats-resume.template-10 { font-family: 'Courier New', monospace; }
+.ats-resume.template-10 h1 { font-family: 'Courier New', monospace; }
+.ats-resume.template-10 .ats-section-title { border-bottom: 1px dashed #000; }

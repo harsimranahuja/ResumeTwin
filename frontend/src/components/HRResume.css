@@ -1,0 +1,454 @@
+/* ===== HR Resume - Modern, visually rich, two-column ===== */
+.hr-resume {
+  background: #ffffff;
+  color: #2d2d2d;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  max-width: 800px;
+  min-height: 1123px; /* A4 page height at 96dpi */
+  display: grid;
+  grid-template-columns: 260px 1fr;
+}
+
+/* Sidebar */
+.hr-sidebar {
+  background: linear-gradient(180deg, #1e1b4b 0%, #312e81 100%);
+  color: #e0e0ff;
+  padding: 36px 24px;
+}
+
+.hr-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #818cf8, #6366f1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  margin: 0 auto 16px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.hr-sidebar-name {
+  text-align: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.hr-sidebar-title {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #a5b4fc;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.hr-sidebar-section {
+  margin-bottom: 22px;
+}
+
+.hr-sidebar-section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #a5b4fc;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(165, 180, 252, 0.2);
+}
+
+/* Contact items */
+.hr-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  word-break: break-all;
+}
+
+.hr-contact-icon {
+  flex-shrink: 0;
+  width: 16px;
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+/* Skills bars */
+.hr-skill-item {
+  margin-bottom: 10px;
+}
+
+.hr-skill-name {
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+  color: #e0e0ff;
+}
+
+.hr-skill-bar {
+  height: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.hr-skill-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #818cf8, #a78bfa);
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+/* Certifications in sidebar */
+.hr-cert-item {
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+  padding-left: 12px;
+  position: relative;
+  line-height: 1.4;
+}
+
+.hr-cert-item::before {
+  content: '●';
+  position: absolute;
+  left: 0;
+  color: #818cf8;
+  font-size: 0.5rem;
+  top: 3px;
+}
+
+/* Main Content */
+.hr-main {
+  padding: 36px 32px;
+}
+
+.hr-main-name {
+  display: none;
+}
+
+.hr-section {
+  margin-bottom: 24px;
+}
+
+.hr-section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #4338ca;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #e0e7ff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hr-section-icon {
+  font-size: 0.85rem;
+}
+
+.hr-summary-text {
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.7;
+}
+
+/* Experience entries */
+.hr-entry {
+  margin-bottom: 18px;
+  position: relative;
+  padding-left: 16px;
+}
+
+.hr-entry::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #818cf8, #6366f1);
+}
+
+.hr-entry::after {
+  content: '';
+  position: absolute;
+  left: 3.5px;
+  top: 16px;
+  bottom: -10px;
+  width: 1px;
+  background: #e0e7ff;
+}
+
+.hr-entry:last-child::after {
+  display: none;
+}
+
+.hr-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.hr-entry-company {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1e1b4b;
+}
+
+.hr-entry-position {
+  font-size: 0.88rem;
+  color: #4338ca;
+  font-weight: 600;
+}
+
+.hr-entry-date {
+  font-size: 0.78rem;
+  color: #888;
+  background: #f0f0ff;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.hr-entry-body {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 6px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* Education */
+.hr-edu-entry {
+  margin-bottom: 14px;
+  padding-left: 16px;
+  position: relative;
+}
+
+.hr-edu-entry::before {
+  content: '🎓';
+  position: absolute;
+  left: -2px;
+  top: 0;
+  font-size: 0.7rem;
+}
+
+.hr-edu-institution {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #1e1b4b;
+}
+
+.hr-edu-degree {
+  font-size: 0.85rem;
+  color: #4338ca;
+}
+
+.hr-edu-date {
+  font-size: 0.78rem;
+  color: #888;
+}
+
+.hr-edu-gpa {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* Projects */
+.hr-project {
+  margin-bottom: 14px;
+  padding: 12px;
+  background: #f8f9ff;
+  border-radius: 8px;
+  border-left: 3px solid #818cf8;
+}
+
+.hr-project-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #1e1b4b;
+}
+
+.hr-project-tech {
+  font-size: 0.78rem;
+  color: #818cf8;
+  font-weight: 500;
+}
+
+.hr-project-desc {
+  font-size: 0.83rem;
+  color: #555;
+  margin-top: 4px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+@media print {
+  .hr-resume {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* Fit One Page Mode */
+.hr-fit-one-page {
+  min-height: unset;
+  height: 1100px;
+  overflow: hidden;
+}
+
+.hr-fit-one-page .hr-sidebar {
+  padding: 24px 16px;
+}
+
+.hr-fit-one-page .hr-main {
+  padding: 24px 20px;
+}
+
+.hr-fit-one-page .hr-sidebar-name {
+  font-size: 1.15rem;
+}
+
+.hr-fit-one-page .hr-section {
+  margin-bottom: 16px;
+}
+
+.hr-fit-one-page .hr-entry {
+  margin-bottom: 12px;
+}
+
+.hr-fit-one-page .hr-sidebar-section-title,
+.hr-fit-one-page .hr-section-title {
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+}
+
+.hr-fit-one-page * {
+  font-size: 0.9em;
+}
+
+.hr-fit-one-page .hr-section-icon {
+  font-size: 1em;
+}
+
+/* ===== HR Templates ===== */
+
+/* Template 1: Default (Indigo) */
+/* Uses base styles */
+
+/* Template 2: Teal */
+.hr-resume.template-2 .hr-sidebar { background: linear-gradient(180deg, #134e4a 0%, #0f766e 100%); }
+.hr-resume.template-2 .hr-avatar { background: linear-gradient(135deg, #2dd4bf, #0d9488); }
+.hr-resume.template-2 .hr-skill-fill { background: linear-gradient(90deg, #2dd4bf, #14b8a6); }
+.hr-resume.template-2 .hr-section-title { color: #0f766e; border-bottom-color: #ccfbf1; }
+.hr-resume.template-2 .hr-entry-position, .hr-resume.template-2 .hr-edu-degree { color: #0f766e; }
+.hr-resume.template-2 .hr-entry::before { background: linear-gradient(135deg, #2dd4bf, #0d9488); }
+.hr-resume.template-2 .hr-entry::after { background: #ccfbf1; }
+.hr-resume.template-2 .hr-project { border-left-color: #2dd4bf; }
+.hr-resume.template-2 .hr-project-tech { color: #0d9488; }
+.hr-resume.template-2 .hr-cert-item::before { color: #2dd4bf; }
+
+/* Template 3: Elegant Purple */
+.hr-resume.template-3 .hr-sidebar { background: linear-gradient(180deg, #3b0764 0%, #581c87 100%); }
+.hr-resume.template-3 .hr-avatar { background: linear-gradient(135deg, #c084fc, #9333ea); }
+.hr-resume.template-3 .hr-skill-fill { background: linear-gradient(90deg, #c084fc, #a855f7); }
+.hr-resume.template-3 .hr-section-title { color: #6b21a8; border-bottom-color: #f3e8ff; }
+.hr-resume.template-3 .hr-entry-position, .hr-resume.template-3 .hr-edu-degree { color: #6b21a8; }
+.hr-resume.template-3 .hr-entry::before { background: linear-gradient(135deg, #c084fc, #9333ea); }
+.hr-resume.template-3 .hr-entry::after { background: #f3e8ff; }
+.hr-resume.template-3 .hr-project { border-left-color: #c084fc; }
+.hr-resume.template-3 .hr-project-tech { color: #9333ea; }
+.hr-resume.template-3 .hr-cert-item::before { color: #c084fc; }
+
+/* Template 4: Forest Green */
+.hr-resume.template-4 .hr-sidebar { background: linear-gradient(180deg, #064e3b 0%, #14532d 100%); }
+.hr-resume.template-4 .hr-avatar { background: linear-gradient(135deg, #4ade80, #16a34a); }
+.hr-resume.template-4 .hr-skill-fill { background: linear-gradient(90deg, #4ade80, #22c55e); }
+.hr-resume.template-4 .hr-section-title { color: #15803d; border-bottom-color: #dcfce7; }
+.hr-resume.template-4 .hr-entry-position, .hr-resume.template-4 .hr-edu-degree { color: #15803d; }
+.hr-resume.template-4 .hr-entry::before { background: linear-gradient(135deg, #4ade80, #16a34a); }
+.hr-resume.template-4 .hr-entry::after { background: #dcfce7; }
+.hr-resume.template-4 .hr-project { border-left-color: #4ade80; }
+.hr-resume.template-4 .hr-project-tech { color: #16a34a; }
+.hr-resume.template-4 .hr-cert-item::before { color: #4ade80; }
+
+/* Template 5: Crimson/Ruby */
+.hr-resume.template-5 .hr-sidebar { background: linear-gradient(180deg, #4c0519 0%, #881337 100%); }
+.hr-resume.template-5 .hr-avatar { background: linear-gradient(135deg, #fb7185, #e11d48); }
+.hr-resume.template-5 .hr-skill-fill { background: linear-gradient(90deg, #fb7185, #f43f5e); }
+.hr-resume.template-5 .hr-section-title { color: #be123c; border-bottom-color: #ffe4e6; }
+.hr-resume.template-5 .hr-entry-position, .hr-resume.template-5 .hr-edu-degree { color: #be123c; }
+.hr-resume.template-5 .hr-entry::before { background: linear-gradient(135deg, #fb7185, #e11d48); }
+.hr-resume.template-5 .hr-entry::after { background: #ffe4e6; }
+.hr-resume.template-5 .hr-project { border-left-color: #fb7185; }
+.hr-resume.template-5 .hr-project-tech { color: #e11d48; }
+.hr-resume.template-5 .hr-cert-item::before { color: #fb7185; }
+
+/* Template 6: Right Sidebar (Default Colors) */
+.hr-resume.template-6 { grid-template-columns: 1fr 260px; }
+.hr-resume.template-6 .hr-main { grid-column: 1; grid-row: 1; }
+.hr-resume.template-6 .hr-sidebar { grid-column: 2; grid-row: 1; border-left: 1px solid #eee; }
+
+/* Template 7: Dark Mode Main */
+.hr-resume.template-7 .hr-main { background: #121212; color: #e0e0e0; }
+.hr-resume.template-7 .hr-summary-text, .hr-resume.template-7 .hr-entry-body, .hr-resume.template-7 .hr-project-desc { color: #b3b3b3; }
+.hr-resume.template-7 .hr-entry-company, .hr-resume.template-7 .hr-edu-institution, .hr-resume.template-7 .hr-project-title { color: #ffffff; }
+.hr-resume.template-7 .hr-section-title { border-bottom-color: #333; color: #a5b4fc; }
+.hr-resume.template-7 .hr-entry-date { background: #2a2a2a; color: #ccc; }
+.hr-resume.template-7 .hr-project { background: #1e1e1e; border-left-color: #a5b4fc; }
+.hr-resume.template-7 .hr-entry::after { background: #333; }
+.hr-resume.template-7 .hr-entry-position, .hr-resume.template-7 .hr-edu-degree { color: #a5b4fc; }
+.hr-resume.template-7 .hr-project-tech { color: #a5b4fc; }
+
+/* Template 8: Monochrome */
+.hr-resume.template-8 .hr-sidebar { background: #1a1a1a; }
+.hr-resume.template-8 .hr-avatar { background: #333; border-color: #666; }
+.hr-resume.template-8 .hr-skill-fill { background: #ccc; }
+.hr-resume.template-8 .hr-section-title { color: #000; border-bottom-color: #eee; }
+.hr-resume.template-8 .hr-entry-position, .hr-resume.template-8 .hr-edu-degree { color: #333; }
+.hr-resume.template-8 .hr-entry::before { background: #333; }
+.hr-resume.template-8 .hr-entry::after { background: #eee; }
+.hr-resume.template-8 .hr-project { border-left-color: #333; background: #f9f9f9; }
+.hr-resume.template-8 .hr-project-tech { color: #333; }
+.hr-resume.template-8 .hr-cert-item::before { color: #fff; }
+.hr-resume.template-8 .hr-sidebar-section-title { color: #ccc; }
+.hr-resume.template-8 .hr-sidebar-title { color: #ccc; }
+
+/* Template 9: Ocean Blue */
+.hr-resume.template-9 .hr-sidebar { background: linear-gradient(180deg, #082f49 0%, #0369a1 100%); }
+.hr-resume.template-9 .hr-avatar { background: linear-gradient(135deg, #38bdf8, #0284c7); }
+.hr-resume.template-9 .hr-skill-fill { background: linear-gradient(90deg, #38bdf8, #0ea5e9); }
+.hr-resume.template-9 .hr-section-title { color: #0284c7; border-bottom-color: #e0f2fe; }
+.hr-resume.template-9 .hr-entry-position, .hr-resume.template-9 .hr-edu-degree { color: #0284c7; }
+.hr-resume.template-9 .hr-entry::before { background: linear-gradient(135deg, #38bdf8, #0284c7); }
+.hr-resume.template-9 .hr-entry::after { background: #e0f2fe; }
+.hr-resume.template-9 .hr-project { border-left-color: #38bdf8; }
+.hr-resume.template-9 .hr-project-tech { color: #0284c7; }
+.hr-resume.template-9 .hr-cert-item::before { color: #38bdf8; }
+
+/* Template 10: Right Sidebar Teal */
+.hr-resume.template-10 { grid-template-columns: 1fr 260px; }
+.hr-resume.template-10 .hr-main { grid-column: 1; grid-row: 1; }
+.hr-resume.template-10 .hr-sidebar { grid-column: 2; grid-row: 1; background: linear-gradient(180deg, #134e4a 0%, #0f766e 100%); }
+.hr-resume.template-10 .hr-avatar { background: linear-gradient(135deg, #2dd4bf, #0d9488); }
+.hr-resume.template-10 .hr-skill-fill { background: linear-gradient(90deg, #2dd4bf, #14b8a6); }
+.hr-resume.template-10 .hr-section-title { color: #0f766e; border-bottom-color: #ccfbf1; }
+.hr-resume.template-10 .hr-entry-position, .hr-resume.template-10 .hr-edu-degree { color: #0f766e; }
+.hr-resume.template-10 .hr-entry::before { background: linear-gradient(135deg, #2dd4bf, #0d9488); }
+.hr-resume.template-10 .hr-entry::after { background: #ccfbf1; }
+.hr-resume.template-10 .hr-project { border-left-color: #2dd4bf; }
+.hr-resume.template-10 .hr-project-tech { color: #0d9488; }
+.hr-resume.template-10 .hr-cert-item::before { color: #2dd4bf; }

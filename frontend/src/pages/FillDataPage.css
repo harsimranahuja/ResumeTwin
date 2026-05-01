@@ -1,0 +1,369 @@
+.fill-data-page {
+  min-height: 100vh;
+  padding: var(--space-xl) var(--space-lg);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.fill-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  animation: fadeInUp 0.6s ease;
+}
+
+.fill-header h1 {
+  font-size: 2rem;
+  margin-bottom: var(--space-sm);
+}
+
+.fill-header p {
+  color: var(--text-secondary);
+}
+
+/* Progress Steps */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: var(--space-2xl);
+  animation: fadeInUp 0.6s ease 0.1s both;
+}
+
+.progress-step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.step-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 2px solid var(--border-subtle);
+  color: var(--text-muted);
+  background: var(--bg-primary);
+  transition: all var(--transition-normal);
+  flex-shrink: 0;
+}
+
+.step-number.active {
+  border-color: var(--accent-primary);
+  color: white;
+  background: var(--accent-secondary);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.step-number.completed {
+  border-color: var(--success);
+  background: var(--success);
+  color: white;
+}
+
+.step-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  display: none;
+}
+
+.step-line {
+  width: 40px;
+  height: 2px;
+  background: var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.step-line.completed {
+  background: var(--success);
+}
+
+@media (min-width: 768px) {
+  .step-label {
+    display: block;
+  }
+
+  .step-line {
+    width: 60px;
+  }
+}
+
+/* Form Section */
+.form-section {
+  animation: fadeInUp 0.4s ease;
+}
+
+.form-section-title {
+  font-size: 1.3rem;
+  margin-bottom: var(--space-xs);
+}
+
+.form-section-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xl);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.form-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dynamic entries */
+.entry-card {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-md);
+  position: relative;
+  animation: fadeInUp 0.3s ease;
+}
+
+.entry-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.entry-card-header h4 {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.add-entry-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-md);
+  background: none;
+  border: 2px dashed var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  margin-top: var(--space-sm);
+}
+
+.add-entry-btn:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background: rgba(129, 140, 248, 0.05);
+}
+
+/* Skills Tags */
+.skills-input-row {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.skills-input-row input {
+  flex: 1;
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 0.4rem 0.8rem;
+  background: rgba(129, 140, 248, 0.12);
+  border: 1px solid rgba(129, 140, 248, 0.2);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  color: var(--accent-primary);
+  animation: fadeIn 0.2s ease;
+}
+
+.skill-tag button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+  transition: color var(--transition-fast);
+}
+
+.skill-tag button:hover {
+  color: var(--danger);
+}
+
+/* Certifications */
+.cert-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.cert-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.6rem 1rem;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  animation: fadeIn 0.2s ease;
+}
+
+.cert-item button {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color var(--transition-fast);
+}
+
+.cert-item button:hover {
+  color: var(--danger);
+}
+
+/* Navigation */
+.form-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* Checkbox */
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.checkbox-row input[type="checkbox"] {
+  accent-color: var(--accent-primary);
+  width: 16px;
+  height: 16px;
+}
+
+.checkbox-row label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .fill-data-page {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .fill-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .progress-bar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2px;
+  }
+
+  .step-line {
+    width: 20px;
+  }
+
+  .step-number {
+    width: 30px;
+    height: 30px;
+    font-size: 0.75rem;
+  }
+
+  .form-section-title {
+    font-size: 1.1rem;
+  }
+
+  .entry-card {
+    padding: var(--space-md);
+  }
+
+  .entry-card-header {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .skills-input-row {
+    flex-direction: column;
+  }
+
+  .skills-input-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .form-nav {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .form-nav .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .fill-data-page {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .fill-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .step-line {
+    width: 12px;
+  }
+
+  .step-number {
+    width: 26px;
+    height: 26px;
+    font-size: 0.7rem;
+  }
+
+  .form-grid {
+    gap: var(--space-sm);
+  }
+
+  .skill-tag {
+    font-size: 0.78rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+

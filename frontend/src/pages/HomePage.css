@@ -1,0 +1,238 @@
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+.home-hero {
+  max-width: 700px;
+  margin-bottom: var(--space-3xl);
+  animation: fadeInUp 0.8s ease;
+}
+
+.home-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.4rem 1rem;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+.home-badge .dot {
+  width: 6px;
+  height: 6px;
+  background: var(--success);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.home-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  margin-bottom: var(--space-lg);
+  line-height: 1.1;
+}
+
+.home-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+  max-width: 800px;
+  width: 100%;
+}
+
+.home-card {
+  padding: var(--space-2xl);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.8s ease;
+}
+
+.home-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.home-card:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.home-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-gradient);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.home-card:hover::before {
+  opacity: 1;
+}
+
+.card-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  background: rgba(129, 140, 248, 0.1);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  transition: transform var(--transition-normal);
+}
+
+.home-card:hover .card-icon {
+  transform: scale(1.1);
+}
+
+.card-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+
+.card-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.card-arrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-lg);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  transition: gap var(--transition-normal);
+}
+
+.home-card:hover .card-arrow {
+  gap: var(--space-md);
+}
+
+/* Features row */
+.home-features {
+  display: flex;
+  gap: var(--space-2xl);
+  margin-top: var(--space-3xl);
+  animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.home-feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.home-feature .feature-icon {
+  color: var(--accent-primary);
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .home-page {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .home-cards {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .home-card {
+    padding: var(--space-xl);
+  }
+
+  .home-features {
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: center;
+  }
+
+  .home-hero {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .home-subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* History card grid variant */
+.home-cards.has-history {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1100px;
+}
+
+.history-home-card {
+  animation-delay: 0.35s !important;
+}
+
+.history-home-card::before {
+  background: linear-gradient(135deg, #34d399, #6366f1, #818cf8) !important;
+}
+
+.history-icon {
+  background: rgba(52, 211, 153, 0.12) !important;
+}
+
+@media (max-width: 960px) {
+  .home-cards.has-history {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .home-card {
+    padding: var(--space-lg);
+  }
+
+  .card-title {
+    font-size: 1.15rem;
+  }
+
+  .card-desc {
+    font-size: 0.85rem;
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.4rem;
+    margin-bottom: var(--space-md);
+  }
+}
+

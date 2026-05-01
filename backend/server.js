@@ -10,7 +10,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
-app.use(cors());
+const allowedOrigins = [
+  "https://resume-twin.vercel.app/",   // Vite dev
+  "https://resume-twin-git-main-harsimranahujas-projects.vercel.app",   // CRA dev
+  "https://resume-twin-7vld2pkjw-harsimranahujas-projects.vercel.app/"
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
+
 app.use(express.json());
 
 // MongoDB Connection
@@ -55,19 +65,19 @@ app.post('/api/leads', async (req, res) => {
       const existingUser = await User.findOne({ username: username.trim().toLowerCase() });
       if (!existingUser) return res.status(404).json({ error: 'Account not found.' });
       if (existingUser.password !== password) return res.status(401).json({ error: 'Incorrect password.' });
-      return res.status(200).json({ 
-        user: { 
-          fullName: existingUser.fullName, 
-          username: existingUser.username, 
-          goal: existingUser.goal 
-        } 
+      return res.status(200).json({
+        user: {
+          fullName: existingUser.fullName,
+          username: existingUser.username,
+          goal: existingUser.goal
+        }
       });
     }
 
     if (mode === 'signup') {
       const existingUser = await User.findOne({ username: username.trim().toLowerCase() });
       if (existingUser) return res.status(400).json({ error: 'Username already taken.' });
-      
+
       const newUser = new User({
         fullName,
         username: username.trim().toLowerCase(),
@@ -75,15 +85,15 @@ app.post('/api/leads', async (req, res) => {
         goal,
         agreedToTerms
       });
-      
+
       await newUser.save();
-      
-      return res.status(201).json({ 
-        user: { 
-          fullName, 
-          username: newUser.username, 
-          goal 
-        } 
+
+      return res.status(201).json({
+        user: {
+          fullName,
+          username: newUser.username,
+          goal
+        }
       });
     }
   } catch (error) {
@@ -105,14 +115,14 @@ app.post('/api/history/save', async (req, res) => {
       // Update existing entry
       const updated = await Resume.findOneAndUpdate(
         { _id: mongoose.Types.ObjectId.isValid(id) ? id : null, username: email.toLowerCase() },
-        { 
-          title: resumeTitle, 
-          data: resumeData, 
-          updatedAt: Date.now() 
+        {
+          title: resumeTitle,
+          data: resumeData,
+          updatedAt: Date.now()
         },
         { returnDocument: 'after' }
       );
-      
+
       if (updated) {
         return res.status(200).json({ message: 'Resume updated.', id: updated._id });
       }
@@ -124,7 +134,7 @@ app.post('/api/history/save', async (req, res) => {
       title: resumeTitle,
       data: resumeData
     });
-    
+
     await newResume.save();
     return res.status(201).json({ message: 'Resume saved.', id: newResume._id });
   } catch (err) {
@@ -137,7 +147,7 @@ app.get('/api/history/:username', async (req, res) => {
   const { username } = req.params;
   try {
     const resumes = await Resume.find({ username: username.toLowerCase() }).sort({ updatedAt: -1 });
-    
+
     const formattedResumes = resumes.map(r => ({
       id: r._id,
       title: r.title,
@@ -145,7 +155,7 @@ app.get('/api/history/:username', async (req, res) => {
       createdAt: r.createdAt,
       updatedAt: r.updatedAt
     }));
-    
+
     res.status(200).json({ resumes: formattedResumes });
   } catch (err) {
     res.status(500).json({ error: 'Failed to load history.', details: err.message });
@@ -156,11 +166,11 @@ app.get('/api/history/:username', async (req, res) => {
 app.delete('/api/history/:username/:id', async (req, res) => {
   const { username, id } = req.params;
   try {
-    const result = await Resume.findOneAndDelete({ 
-      _id: mongoose.Types.ObjectId.isValid(id) ? id : null, 
-      username: username.toLowerCase() 
+    const result = await Resume.findOneAndDelete({
+      _id: mongoose.Types.ObjectId.isValid(id) ? id : null,
+      username: username.toLowerCase()
     });
-    
+
     if (!result) return res.status(404).json({ error: 'Resume not found.' });
     res.status(200).json({ message: 'Resume deleted.' });
   } catch (err) {
@@ -189,7 +199,7 @@ app.post('/api/feedback', async (req, res) => {
       rating: rating || 0,
       message: message || ''
     });
-    
+
     await newFeedback.save();
     res.status(201).json({ message: 'Feedback received. Thank you!' });
   } catch (err) {
@@ -199,7 +209,7 @@ app.post('/api/feedback', async (req, res) => {
 
 app.listen(PORT, async () => {
   console.log(`Server running on http://localhost:${PORT}`);
-  
+
   // Quick DB Check on Startup
   try {
     const userCount = await User.countDocuments();

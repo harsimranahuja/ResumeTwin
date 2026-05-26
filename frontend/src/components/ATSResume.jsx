@@ -116,6 +116,9 @@ const ATSResume = forwardRef(function ATSResume({ data, fitOnePage, template = '
               {proj.technologies && (
                 <span className="ats-project-tech"> ({proj.technologies})</span>
               )}
+              {proj.link && (
+                <span className="ats-project-link"> — {proj.link}</span>
+              )}
               {proj.description && (
                 <div className="ats-project-desc">{proj.description}</div>
               )}

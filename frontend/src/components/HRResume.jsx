@@ -159,6 +159,9 @@ const HRResume = forwardRef(function HRResume({ data, fitOnePage, template = 'te
                 {proj.technologies && (
                   <div className="hr-project-tech">{proj.technologies}</div>
                 )}
+                {proj.link && (
+                  <div className="hr-project-link">{proj.link}</div>
+                )}
                 {proj.description && (
                   <div className="hr-project-desc">{proj.description}</div>
                 )}

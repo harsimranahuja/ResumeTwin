@@ -288,6 +288,14 @@
   font-weight: 500;
 }
 
+.hr-project-link {
+  font-size: 0.78rem;
+  color: #0066cc;
+  font-weight: 400;
+  margin-top: 2px;
+  word-break: break-word;
+}
+
 .hr-project-desc {
   font-size: 0.83rem;
   color: #555;

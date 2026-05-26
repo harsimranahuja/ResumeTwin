@@ -127,6 +127,12 @@
   font-style: italic;
 }
 
+.ats-project-link {
+  font-size: 10pt;
+  color: #0066cc;
+  font-style: italic;
+}
+
 .ats-project-desc {
   font-size: 10.5pt;
   color: #222;

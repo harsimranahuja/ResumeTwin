@@ -2,6 +2,14 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import multer from 'multer';
+import { spawn } from 'child_process';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 //karandes
@@ -206,6 +214,46 @@ app.post('/api/feedback', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: 'Failed to save feedback.', details: err.message });
   }
+});
+
+// ====== PDF TO DOCX CONVERSION ======
+const upload = multer({ dest: 'uploads/' });
+
+app.post('/api/parse-pdf', upload.single('resume'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file uploaded.' });
+  }
+
+  const pdfPath = req.file.path;
+  const scriptPath = path.join(__dirname, 'convert_and_extract.py');
+
+  // Spawn python process
+  const pythonProcess = spawn('python', [scriptPath, pdfPath]);
+
+  let extractedText = '';
+  let errorText = '';
+
+  pythonProcess.stdout.on('data', (data) => {
+    extractedText += data.toString('utf-8');
+  });
+
+  pythonProcess.stderr.on('data', (data) => {
+    errorText += data.toString('utf-8');
+  });
+
+  pythonProcess.on('close', (code) => {
+    // Clean up uploaded file
+    fs.unlink(pdfPath, (err) => {
+      if (err) console.error('Failed to delete uploaded PDF:', err);
+    });
+
+    if (code !== 0) {
+      console.error('Python script error:', errorText);
+      return res.status(500).json({ error: 'Failed to parse PDF', details: errorText });
+    }
+
+    res.status(200).json({ text: extractedText });
+  });
 });
 
 app.listen(PORT, async () => {

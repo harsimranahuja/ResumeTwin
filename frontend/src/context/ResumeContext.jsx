@@ -25,6 +25,17 @@ const initialState = {
       description: '',
     },
   ],
+  internships: [
+    {
+      id: Date.now() + 3,
+      company: '',
+      role: '',
+      startDate: '',
+      endDate: '',
+      current: false,
+      description: '',
+    },
+  ],
   education: [
     {
       id: Date.now() + 1,
@@ -38,6 +49,9 @@ const initialState = {
     },
   ],
   skills: [],
+  technicalSkills: [],
+  softSkills: [],
+  hobbies: [],
   certifications: [],
   projects: [
     {
@@ -138,6 +152,79 @@ function resumeReducer(state, action) {
       return {
         ...state,
         skills: state.skills.filter((s) => s !== action.payload),
+      };
+
+    case 'SET_TECHNICAL_SKILLS':
+      return { ...state, technicalSkills: action.payload };
+
+    case 'ADD_TECHNICAL_SKILL':
+      if (state.technicalSkills?.includes(action.payload)) return state;
+      return { ...state, technicalSkills: [...(state.technicalSkills || []), action.payload] };
+
+    case 'REMOVE_TECHNICAL_SKILL':
+      return {
+        ...state,
+        technicalSkills: (state.technicalSkills || []).filter((s) => s !== action.payload),
+      };
+
+    case 'SET_SOFT_SKILLS':
+      return { ...state, softSkills: action.payload };
+
+    case 'ADD_SOFT_SKILL':
+      if (state.softSkills?.includes(action.payload)) return state;
+      return { ...state, softSkills: [...(state.softSkills || []), action.payload] };
+
+    case 'REMOVE_SOFT_SKILL':
+      return {
+        ...state,
+        softSkills: (state.softSkills || []).filter((s) => s !== action.payload),
+      };
+
+    case 'SET_HOBBIES':
+      return { ...state, hobbies: action.payload };
+
+    case 'ADD_HOBBY':
+      if (state.hobbies?.includes(action.payload)) return state;
+      return { ...state, hobbies: [...(state.hobbies || []), action.payload] };
+
+    case 'REMOVE_HOBBY':
+      return {
+        ...state,
+        hobbies: (state.hobbies || []).filter((h) => h !== action.payload),
+      };
+
+    case 'SET_INTERNSHIPS':
+      return { ...state, internships: action.payload };
+
+    case 'ADD_INTERNSHIP':
+      return {
+        ...state,
+        internships: [
+          ...state.internships,
+          {
+            id: Date.now(),
+            company: '',
+            role: '',
+            startDate: '',
+            endDate: '',
+            current: false,
+            description: '',
+          },
+        ],
+      };
+
+    case 'REMOVE_INTERNSHIP':
+      return {
+        ...state,
+        internships: state.internships.filter((e) => e.id !== action.payload),
+      };
+
+    case 'UPDATE_INTERNSHIP':
+      return {
+        ...state,
+        internships: state.internships.map((e) =>
+          e.id === action.payload.id ? { ...e, ...action.payload.data } : e
+        ),
       };
 
     case 'SET_CERTIFICATIONS':

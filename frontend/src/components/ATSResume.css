@@ -27,6 +27,15 @@
   line-height: 1.6;
 }
 
+.ats-contact-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ats-contact-link:hover {
+  text-decoration: underline;
+}
+
 .ats-contact span {
   display: inline;
 }
@@ -131,6 +140,11 @@
   font-size: 10pt;
   color: #0066cc;
   font-style: italic;
+  text-decoration: none;
+}
+
+.ats-project-link:hover {
+  text-decoration: underline;
 }
 
 .ats-project-desc {

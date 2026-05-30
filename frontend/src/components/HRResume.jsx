@@ -9,7 +9,19 @@ function formatDate(dateStr) {
 }
 
 const HRResume = forwardRef(function HRResume({ data, fitOnePage, template = 'template-1' }, ref) {
-  const { personal, summary, experience, education, skills, certifications, projects } = data;
+  const {
+    personal,
+    summary,
+    experience,
+    internships = [],
+    education,
+    skills = [],
+    technicalSkills = [],
+    softSkills = [],
+    hobbies = [],
+    certifications = [],
+    projects = [],
+  } = data;
 
   return (
     <div className={`hr-resume ${fitOnePage ? 'hr-fit-one-page' : ''} ${template}`} ref={ref}>
@@ -28,7 +40,7 @@ const HRResume = forwardRef(function HRResume({ data, fitOnePage, template = 'te
           {personal.email && (
             <div className="hr-contact-item">
               <span className="hr-contact-icon">✉</span>
-              <span>{personal.email}</span>
+              <a href={`mailto:${personal.email}`} className="hr-contact-link">{personal.email}</a>
             </div>
           )}
           {personal.phone && (
@@ -46,24 +58,48 @@ const HRResume = forwardRef(function HRResume({ data, fitOnePage, template = 'te
           {personal.linkedin && (
             <div className="hr-contact-item">
               <span className="hr-contact-icon">🔗</span>
-              <span>{personal.linkedin}</span>
+              <a href={personal.linkedin.startsWith('http') ? personal.linkedin : `https://${personal.linkedin}`} target="_blank" rel="noopener noreferrer" className="hr-contact-link">{personal.linkedin}</a>
             </div>
           )}
           {personal.website && (
             <div className="hr-contact-item">
               <span className="hr-contact-icon">🌐</span>
-              <span>{personal.website}</span>
+              <a href={personal.website.startsWith('http') ? personal.website : `https://${personal.website}`} target="_blank" rel="noopener noreferrer" className="hr-contact-link">{personal.website}</a>
             </div>
           )}
         </div>
 
-        {/* Skills */}
-        {skills.length > 0 && (
+        {/* Technical Skills */}
+        {((technicalSkills && technicalSkills.length > 0) || (skills && skills.length > 0)) && (
           <div className="hr-sidebar-section">
-            <h3 className="hr-sidebar-section-title">Skills</h3>
-            {skills.slice(0, 10).map((skill, i) => (
+            <h3 className="hr-sidebar-section-title">Technical Skills</h3>
+            {(technicalSkills && technicalSkills.length > 0 ? technicalSkills : skills).map((skill, i) => (
               <div className="hr-skill-item" key={i}>
                 <div className="hr-skill-name">{skill}</div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Soft Skills */}
+        {softSkills && softSkills.length > 0 && (
+          <div className="hr-sidebar-section">
+            <h3 className="hr-sidebar-section-title">Soft Skills</h3>
+            {softSkills.map((skill, i) => (
+              <div className="hr-skill-item" key={i}>
+                <div className="hr-skill-name">{skill}</div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Hobbies */}
+        {hobbies && hobbies.length > 0 && (
+          <div className="hr-sidebar-section">
+            <h3 className="hr-sidebar-section-title">Hobbies</h3>
+            {hobbies.map((hobby, i) => (
+              <div className="hr-skill-item" key={i}>
+                <div className="hr-skill-name">{hobby}</div>
               </div>
             ))}
           </div>
@@ -123,6 +159,35 @@ const HRResume = forwardRef(function HRResume({ data, fitOnePage, template = 'te
           </div>
         )}
 
+        {/* Internships */}
+        {internships.length > 0 && internships.some((e) => e.company || e.role) && (
+          <div className="hr-section">
+            <h2 className="hr-section-title">
+              <span className="hr-section-icon">🧑‍💻</span> Internships
+            </h2>
+            {internships.filter((e) => e.company || e.role).map((intern) => (
+              <div className="hr-entry" key={intern.id}>
+                <div className="hr-entry-header">
+                  <div>
+                    <div className="hr-entry-company">{intern.company}</div>
+                    {intern.role && (
+                      <div className="hr-entry-position">{intern.role}</div>
+                    )}
+                  </div>
+                  <span className="hr-entry-date">
+                    {formatDate(intern.startDate)}
+                    {(intern.startDate || intern.endDate || intern.current) && ' – '}
+                    {intern.current ? 'Present' : formatDate(intern.endDate)}
+                  </span>
+                </div>
+                {intern.description && (
+                  <div className="hr-entry-body">{intern.description}</div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
         {/* Education */}
         {education.length > 0 && education.some((e) => e.institution || e.degree) && (
           <div className="hr-section">
@@ -160,7 +225,7 @@ const HRResume = forwardRef(function HRResume({ data, fitOnePage, template = 'te
                   <div className="hr-project-tech">{proj.technologies}</div>
                 )}
                 {proj.link && (
-                  <div className="hr-project-link">{proj.link}</div>
+                  <a href={proj.link.startsWith('http') ? proj.link : `https://${proj.link}`} target="_blank" rel="noopener noreferrer" className="hr-project-link">{proj.link}</a>
                 )}
                 {proj.description && (
                   <div className="hr-project-desc">{proj.description}</div>

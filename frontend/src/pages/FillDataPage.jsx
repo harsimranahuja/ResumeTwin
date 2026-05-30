@@ -9,6 +9,7 @@ const STEPS = [
   'Personal',
   'Summary',
   'Experience',
+  'Internships',
   'Education',
   'Skills',
   'Extra',
@@ -57,7 +58,9 @@ export default function FillDataPage() {
   const { state, dispatch } = useResume();
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
-  const [skillInput, setSkillInput] = useState('');
+  const [techSkillInput, setTechSkillInput] = useState('');
+  const [softSkillInput, setSoftSkillInput] = useState('');
+  const [hobbyInput, setHobbyInput] = useState('');
   const [certInput, setCertInput] = useState('');
   const [roleKey, setRoleKey] = useState('general');
   
@@ -397,6 +400,135 @@ export default function FillDataPage() {
     </div>
   );
 
+  const renderInternships = () => (
+    <div className="form-section">
+      <h2 className="form-section-title">Internships</h2>
+      <p className="form-section-subtitle">
+        Add your internship experiences
+      </p>
+      {state.internships.map((intern, idx) => (
+        <div className="entry-card" key={intern.id}>
+          <div className="entry-card-header">
+            <h4>Internship #{idx + 1}</h4>
+            {state.internships.length > 1 && (
+              <button
+                className="btn btn-danger btn-sm"
+                onClick={() =>
+                  dispatch({ type: 'REMOVE_INTERNSHIP', payload: intern.id })
+                }
+              >
+                Remove
+              </button>
+            )}
+          </div>
+          <div className="form-grid">
+            <div className="form-group">
+              <label className="form-label">Company / Organization</label>
+              <input
+                className="form-input"
+                type="text"
+                placeholder="Google, Microsoft, Startup XYZ..."
+                value={intern.company}
+                onChange={(e) =>
+                  dispatch({
+                    type: 'UPDATE_INTERNSHIP',
+                    payload: { id: intern.id, data: { company: e.target.value } },
+                  })
+                }
+              />
+            </div>
+            <div className="form-group">
+              <label className="form-label">Role / Title</label>
+              <input
+                className="form-input"
+                type="text"
+                placeholder="Software Engineering Intern"
+                value={intern.role}
+                onChange={(e) =>
+                  dispatch({
+                    type: 'UPDATE_INTERNSHIP',
+                    payload: { id: intern.id, data: { role: e.target.value } },
+                  })
+                }
+              />
+            </div>
+            <div className="form-group">
+              <label className="form-label">Start Date</label>
+              <MonthYearInput
+                value={intern.startDate}
+                onChange={(val) =>
+                  dispatch({
+                    type: 'UPDATE_INTERNSHIP',
+                    payload: {
+                      id: intern.id,
+                      data: { startDate: val },
+                    },
+                  })
+                }
+              />
+            </div>
+            <div className="form-group">
+              <label className="form-label">End Date</label>
+              <MonthYearInput
+                value={intern.endDate}
+                disabled={intern.current}
+                onChange={(val) =>
+                  dispatch({
+                    type: 'UPDATE_INTERNSHIP',
+                    payload: {
+                      id: intern.id,
+                      data: { endDate: val },
+                    },
+                  })
+                }
+              />
+              <div className="checkbox-row">
+                <input
+                  type="checkbox"
+                  id={`intern-current-${intern.id}`}
+                  checked={intern.current}
+                  onChange={(e) =>
+                    dispatch({
+                      type: 'UPDATE_INTERNSHIP',
+                      payload: {
+                        id: intern.id,
+                        data: { current: e.target.checked, endDate: '' },
+                      },
+                    })
+                  }
+                />
+                <label htmlFor={`intern-current-${intern.id}`}>Currently interning here</label>
+              </div>
+            </div>
+            <div className="form-group full-width">
+              <label className="form-label">Description</label>
+              <textarea
+                className="form-textarea"
+                placeholder="• Developed REST APIs for the internal analytics dashboard...&#10;• Collaborated with the design team to implement UI improvements..."
+                value={intern.description}
+                onChange={(e) =>
+                  dispatch({
+                    type: 'UPDATE_INTERNSHIP',
+                    payload: {
+                      id: intern.id,
+                      data: { description: e.target.value },
+                    },
+                  })
+                }
+              />
+            </div>
+          </div>
+        </div>
+      ))}
+      <button
+        className="add-entry-btn"
+        onClick={() => dispatch({ type: 'ADD_INTERNSHIP' })}
+      >
+        + Add Another Internship
+      </button>
+    </div>
+  );
+
   const renderEducation = () => (
     <div className="form-section">
       <h2 className="form-section-title">Education</h2>
@@ -557,29 +689,34 @@ export default function FillDataPage() {
     <div className="form-section">
       <h2 className="form-section-title">Skills</h2>
       <p className="form-section-subtitle">
-        Add your key technical and soft skills
+        Categorize your skills into technical and soft skills
       </p>
+
+      {/* Technical Skills */}
+      <h3 style={{ fontSize: '1.1rem', margin: '0 0 var(--space-xs)', color: 'var(--text-primary)', fontWeight: 600 }}>
+        Technical Skills
+      </h3>
       <div className="skills-input-row">
         <input
           className="form-input"
           type="text"
-          placeholder="Type a skill and press Enter or Add"
-          value={skillInput}
-          onChange={(e) => setSkillInput(e.target.value)}
+          placeholder="React, Python, SQL, Project Management..."
+          value={techSkillInput}
+          onChange={(e) => setTechSkillInput(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === 'Enter' && skillInput.trim()) {
+            if (e.key === 'Enter' && techSkillInput.trim()) {
               e.preventDefault();
-              dispatch({ type: 'ADD_SKILL', payload: skillInput.trim() });
-              setSkillInput('');
+              dispatch({ type: 'ADD_TECHNICAL_SKILL', payload: techSkillInput.trim() });
+              setTechSkillInput('');
             }
           }}
         />
         <button
           className="btn btn-secondary"
           onClick={() => {
-            if (skillInput.trim()) {
-              dispatch({ type: 'ADD_SKILL', payload: skillInput.trim() });
-              setSkillInput('');
+            if (techSkillInput.trim()) {
+              dispatch({ type: 'ADD_TECHNICAL_SKILL', payload: techSkillInput.trim() });
+              setTechSkillInput('');
             }
           }}
         >
@@ -587,16 +724,16 @@ export default function FillDataPage() {
         </button>
       </div>
 
-      <div style={{ marginTop: '0.5rem', marginBottom: '1.5rem' }}>
-        <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.6rem' }}>Suggested skills for {tmpl.label}:</p>
+      <div style={{ marginTop: '0.5rem', marginBottom: '1.2rem' }}>
+        <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.6rem' }}>Suggested technical skills for {tmpl.label}:</p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-          {tmpl.suggestions.map(s => (
+          {(tmpl.techSuggestions || tmpl.suggestions || []).map(s => (
             <button 
               key={s} 
               className="btn btn-sm" 
-              style={{ padding: '0.3rem 0.6rem', background: 'var(--bg-card)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)', borderRadius: 'var(--radius-full)' }}
+              style={{ padding: '0.3rem 0.6rem', background: 'var(--bg-card)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)', borderRadius: 'var(--radius-full)', cursor: 'pointer' }}
               onClick={() => {
-                if(!state.skills.includes(s)) dispatch({ type: 'ADD_SKILL', payload: s });
+                if(!state.technicalSkills?.includes(s)) dispatch({ type: 'ADD_TECHNICAL_SKILL', payload: s });
               }}
             >
               + {s}
@@ -605,8 +742,20 @@ export default function FillDataPage() {
         </div>
       </div>
 
-      <div className="skills-tags">
-        {state.skills.map((skill) => (
+      <div className="skills-tags" style={{ marginBottom: '2rem' }}>
+        {state.technicalSkills?.map((skill) => (
+          <span className="skill-tag" key={skill}>
+            {skill}
+            <button
+              onClick={() =>
+                dispatch({ type: 'REMOVE_TECHNICAL_SKILL', payload: skill })
+              }
+            >
+              ×
+            </button>
+          </span>
+        ))}
+        {(!state.technicalSkills || state.technicalSkills.length === 0) && state.skills?.map((skill) => (
           <span className="skill-tag" key={skill}>
             {skill}
             <button
@@ -619,12 +768,77 @@ export default function FillDataPage() {
           </span>
         ))}
       </div>
+
+      {/* Soft Skills */}
+      <h3 style={{ fontSize: '1.1rem', margin: '0 0 var(--space-xs)', color: 'var(--text-primary)', fontWeight: 600 }}>
+        Soft Skills
+      </h3>
+      <div className="skills-input-row">
+        <input
+          className="form-input"
+          type="text"
+          placeholder="Leadership, Communication, Time Management..."
+          value={softSkillInput}
+          onChange={(e) => setSoftSkillInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && softSkillInput.trim()) {
+              e.preventDefault();
+              dispatch({ type: 'ADD_SOFT_SKILL', payload: softSkillInput.trim() });
+              setSoftSkillInput('');
+            }
+          }}
+        />
+        <button
+          className="btn btn-secondary"
+          onClick={() => {
+            if (softSkillInput.trim()) {
+              dispatch({ type: 'ADD_SOFT_SKILL', payload: softSkillInput.trim() });
+              setSoftSkillInput('');
+            }
+          }}
+        >
+          Add
+        </button>
+      </div>
+
+      <div style={{ marginTop: '0.5rem', marginBottom: '1.2rem' }}>
+        <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.6rem' }}>Suggested soft skills for {tmpl.label}:</p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+          {(tmpl.softSuggestions || ['Communication', 'Leadership', 'Problem Solving', 'Teamwork', 'Time Management']).map(s => (
+            <button 
+              key={s} 
+              className="btn btn-sm" 
+              style={{ padding: '0.3rem 0.6rem', background: 'var(--bg-card)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)', borderRadius: 'var(--radius-full)', cursor: 'pointer' }}
+              onClick={() => {
+                if(!state.softSkills?.includes(s)) dispatch({ type: 'ADD_SOFT_SKILL', payload: s });
+              }}
+            >
+              + {s}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="skills-tags" style={{ marginTop: '0.8rem' }}>
+        {state.softSkills?.map((skill) => (
+          <span className="skill-tag" key={skill}>
+            {skill}
+            <button
+              onClick={() =>
+                dispatch({ type: 'REMOVE_SOFT_SKILL', payload: skill })
+              }
+            >
+              ×
+            </button>
+          </span>
+        ))}
+      </div>
     </div>
   );
 
   const renderExtras = () => (
     <div className="form-section">
-      <h2 className="form-section-title">Certifications & Projects</h2>
+      <h2 className="form-section-title">Certifications, Projects & Hobbies</h2>
       <p className="form-section-subtitle">
         Optional but great to showcase your achievements
       </p>
@@ -780,10 +994,69 @@ export default function FillDataPage() {
       ))}
       <button
         className="add-entry-btn"
+        style={{ marginBottom: 'var(--space-xl)' }}
         onClick={() => dispatch({ type: 'ADD_PROJECT' })}
       >
         + Add Another Project
       </button>
+
+      {/* Hobbies */}
+      <h3
+        style={{
+          fontSize: '1rem',
+          margin: 'var(--space-xl) 0 var(--space-sm)',
+          color: 'var(--text-secondary)',
+        }}
+      >
+        Hobbies & Interests
+      </h3>
+      <div className="skills-input-row">
+        <input
+          className="form-input"
+          type="text"
+          placeholder="Reading, Photography, Chess..."
+          value={hobbyInput}
+          onChange={(e) => setHobbyInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && hobbyInput.trim()) {
+              e.preventDefault();
+              dispatch({
+                type: 'ADD_HOBBY',
+                payload: hobbyInput.trim(),
+              });
+              setHobbyInput('');
+            }
+          }}
+        />
+        <button
+          className="btn btn-secondary"
+          onClick={() => {
+            if (hobbyInput.trim()) {
+              dispatch({
+                type: 'ADD_HOBBY',
+                payload: hobbyInput.trim(),
+              });
+              setHobbyInput('');
+            }
+          }}
+        >
+          Add
+        </button>
+      </div>
+      <div className="skills-tags" style={{ marginTop: '0.8rem' }}>
+        {state.hobbies?.map((hobby) => (
+          <span className="skill-tag" key={hobby}>
+            {hobby}
+            <button
+              onClick={() =>
+                dispatch({ type: 'REMOVE_HOBBY', payload: hobby })
+              }
+            >
+              ×
+            </button>
+          </span>
+        ))}
+      </div>
     </div>
   );
 
@@ -796,10 +1069,12 @@ export default function FillDataPage() {
       case 2:
         return renderExperience();
       case 3:
-        return renderEducation();
+        return renderInternships();
       case 4:
-        return renderSkills();
+        return renderEducation();
       case 5:
+        return renderSkills();
+      case 6:
         return renderExtras();
       default:
         return null;

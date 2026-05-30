@@ -28,8 +28,12 @@ export default function UploadPage() {
     setParsing(true);
 
     try {
-      const text = await readFileContent(file);
-      const data = parseResumeText(text);
+      const result = await readFileContent(file);
+      // readFileContent returns a structured object for ResumeTwin PDFs (embedded metadata)
+      // and a plain text string for external resumes
+      const data = typeof result === 'object' && result !== null
+        ? result
+        : parseResumeText(result);
       setParsed(data);
       dispatch({ type: 'RESET' });
       dispatch({ type: 'SET_ALL', payload: data });
@@ -124,9 +128,10 @@ export default function UploadPage() {
                 <strong>{parsed.personal.fullName}</strong>
                 {parsed.personal.email && <> • {parsed.personal.email}</>}
                 {parsed.personal.phone && <> • {parsed.personal.phone}</>}
-                {parsed.personal.linkedin && (
-                  <> • {parsed.personal.linkedin}</>
-                )}
+                {parsed.personal.location && <> • {parsed.personal.location}</>}
+                {parsed.personal.linkedin && <> • {parsed.personal.linkedin}</>}
+                {parsed.personal.website && <> • {parsed.personal.website}</>}
+                {parsed.personal.jobTitle && <> • {parsed.personal.jobTitle}</>}
               </div>
             </div>
           )}
@@ -159,11 +164,94 @@ export default function UploadPage() {
               </div>
             )}
 
-          {parsed.skills.length > 0 && (
+          {parsed.internships.length > 0 &&
+            parsed.internships[0].company && (
+              <div className="parsed-section">
+                <h4>
+                  Internships ({parsed.internships.length} entries)
+                </h4>
+                {parsed.internships.map((intern, i) => (
+                  <div className="parsed-content" key={i} style={{ marginBottom: '0.5rem' }}>
+                    <strong>{intern.company}</strong>
+                    {intern.role && <> — {intern.role}</>}
+                    {intern.description && (
+                      <p style={{ marginTop: '0.3rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                        {intern.description.substring(0, 150)}
+                        {intern.description.length > 150 && '...'}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
+          {parsed.education.length > 0 &&
+            parsed.education[0].institution && (
+              <div className="parsed-section">
+                <h4>Education</h4>
+                {parsed.education.map((edu, i) => (
+                  <div className="parsed-content" key={i} style={{ marginBottom: '0.3rem' }}>
+                    <strong>{edu.institution}</strong>
+                    {(edu.degree || edu.field) && <> — {edu.degree} {edu.field && `in ${edu.field}`}</>}
+                    {edu.gpa && <> (Score: {edu.gpa})</>}
+                  </div>
+                ))}
+              </div>
+            )}
+
+          {parsed.projects.length > 0 &&
+            parsed.projects[0].name && (
+              <div className="parsed-section">
+                <h4>Projects</h4>
+                {parsed.projects.map((proj, i) => (
+                  <div className="parsed-content" key={i} style={{ marginBottom: '0.3rem' }}>
+                    <strong>{proj.name}</strong>
+                    {proj.technologies && <> ({proj.technologies})</>}
+                    {proj.link && <> • <span style={{ fontSize: '0.85rem', color: 'var(--accent-primary)' }}>{proj.link}</span></>}
+                  </div>
+                ))}
+              </div>
+            )}
+
+          {parsed.technicalSkills && parsed.technicalSkills.length > 0 ? (
+            <div className="parsed-section">
+              <h4>Technical Skills ({parsed.technicalSkills.length})</h4>
+              <div className="parsed-content">
+                {parsed.technicalSkills.join(' • ')}
+              </div>
+            </div>
+          ) : parsed.skills.length > 0 ? (
             <div className="parsed-section">
               <h4>Skills ({parsed.skills.length})</h4>
               <div className="parsed-content">
                 {parsed.skills.join(' • ')}
+              </div>
+            </div>
+          ) : null}
+
+          {parsed.softSkills && parsed.softSkills.length > 0 && (
+            <div className="parsed-section">
+              <h4>Soft Skills ({parsed.softSkills.length})</h4>
+              <div className="parsed-content">
+                {parsed.softSkills.join(' • ')}
+              </div>
+            </div>
+          )}
+
+          {parsed.certifications && parsed.certifications.length > 0 && (
+            <div className="parsed-section">
+              <h4>Certifications ({parsed.certifications.length})</h4>
+              <div className="parsed-content">
+                {parsed.certifications.join(' • ')}
+              </div>
+            </div>
+          )}
+
+          {parsed.hobbies && parsed.hobbies.length > 0 && (
+            <div className="parsed-section">
+              <h4>Hobbies & Interests ({parsed.hobbies.length})</h4>
+              <div className="parsed-content">
+                {parsed.hobbies.join(' • ')}
               </div>
             </div>
           )}

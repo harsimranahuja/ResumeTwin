@@ -78,7 +78,8 @@ export default function PreviewPage({ user }) {
           : `${state.personal.fullName || 'Resume'}_HR.pdf`;
       await exportToPdf(ref.current, filename, {
         compressed: compressedSize,
-        format: paperFormat
+        format: paperFormat,
+        resumeData: state
       });
     } catch (err) {
       console.error('Download failed:', err);

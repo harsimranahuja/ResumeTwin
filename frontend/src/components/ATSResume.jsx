@@ -9,7 +9,19 @@ function formatDate(dateStr) {
 }
 
 const ATSResume = forwardRef(function ATSResume({ data, fitOnePage, template = 'template-1' }, ref) {
-  const { personal, summary, experience, education, skills, certifications, projects } = data;
+  const {
+    personal,
+    summary,
+    experience,
+    internships = [],
+    education,
+    skills = [],
+    technicalSkills = [],
+    softSkills = [],
+    hobbies = [],
+    certifications = [],
+    projects = [],
+  } = data;
 
   return (
     <div className={`ats-resume ${fitOnePage ? 'ats-fit-one-page' : ''} ${template}`} ref={ref}>
@@ -20,11 +32,23 @@ const ATSResume = forwardRef(function ATSResume({ data, fitOnePage, template = '
         </div>
       )}
       <div className="ats-contact">
-        {personal.email && <span>{personal.email}</span>}
+        {personal.email && (
+          <span>
+            <a href={`mailto:${personal.email}`} className="ats-contact-link">{personal.email}</a>
+          </span>
+        )}
         {personal.phone && <span>{personal.phone}</span>}
         {personal.location && <span>{personal.location}</span>}
-        {personal.linkedin && <span>{personal.linkedin}</span>}
-        {personal.website && <span>{personal.website}</span>}
+        {personal.linkedin && (
+          <span>
+            <a href={personal.linkedin.startsWith('http') ? personal.linkedin : `https://${personal.linkedin}`} target="_blank" rel="noopener noreferrer" className="ats-contact-link">{personal.linkedin}</a>
+          </span>
+        )}
+        {personal.website && (
+          <span>
+            <a href={personal.website.startsWith('http') ? personal.website : `https://${personal.website}`} target="_blank" rel="noopener noreferrer" className="ats-contact-link">{personal.website}</a>
+          </span>
+        )}
       </div>
 
       {summary && (
@@ -60,6 +84,32 @@ const ATSResume = forwardRef(function ATSResume({ data, fitOnePage, template = '
         </div>
       )}
 
+      {internships.length > 0 && internships.some((e) => e.company || e.role) && (
+        <div className="ats-section">
+          <h2 className="ats-section-title">Internships</h2>
+          {internships.filter((e) => e.company || e.role).map((intern) => (
+            <div className="ats-entry" key={intern.id}>
+              <div className="ats-entry-header">
+                <div>
+                  <span className="ats-entry-title">{intern.company}</span>
+                  {intern.role && (
+                    <span className="ats-entry-subtitle"> — {intern.role}</span>
+                  )}
+                </div>
+                <span className="ats-entry-date">
+                  {formatDate(intern.startDate)}
+                  {(intern.startDate || intern.endDate || intern.current) && ' – '}
+                  {intern.current ? 'Present' : formatDate(intern.endDate)}
+                </span>
+              </div>
+              {intern.description && (
+                <div className="ats-entry-body">{intern.description}</div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
       {education.length > 0 && education.some((e) => e.institution || e.degree) && (
         <div className="ats-section">
           <h2 className="ats-section-title">Education</h2>
@@ -89,10 +139,24 @@ const ATSResume = forwardRef(function ATSResume({ data, fitOnePage, template = '
         </div>
       )}
 
-      {skills.length > 0 && (
+      {((technicalSkills && technicalSkills.length > 0) || (skills && skills.length > 0)) && (
         <div className="ats-section">
-          <h2 className="ats-section-title">Skills</h2>
-          <div className="ats-skills-list">{skills.join(', ')}</div>
+          <h2 className="ats-section-title">Technical Skills</h2>
+          <div className="ats-skills-list">{(technicalSkills && technicalSkills.length > 0 ? technicalSkills : skills).join(', ')}</div>
+        </div>
+      )}
+
+      {softSkills && softSkills.length > 0 && (
+        <div className="ats-section">
+          <h2 className="ats-section-title">Soft Skills</h2>
+          <div className="ats-skills-list">{softSkills.join(', ')}</div>
+        </div>
+      )}
+
+      {hobbies && hobbies.length > 0 && (
+        <div className="ats-section">
+          <h2 className="ats-section-title">Hobbies & Interests</h2>
+          <div className="ats-skills-list">{hobbies.join(', ')}</div>
         </div>
       )}
 
@@ -117,7 +181,10 @@ const ATSResume = forwardRef(function ATSResume({ data, fitOnePage, template = '
                 <span className="ats-project-tech"> ({proj.technologies})</span>
               )}
               {proj.link && (
-                <span className="ats-project-link"> — {proj.link}</span>
+                <>
+                  <span> — </span>
+                  <a href={proj.link.startsWith('http') ? proj.link : `https://${proj.link}`} target="_blank" rel="noopener noreferrer" className="ats-project-link">{proj.link}</a>
+                </>
               )}
               {proj.description && (
                 <div className="ats-project-desc">{proj.description}</div>

@@ -7,6 +7,12 @@
   min-height: 1123px; /* A4 page height at 96dpi */
   display: grid;
   grid-template-columns: 260px 1fr;
+  /* Paint the sidebar column background on the container itself
+     so it extends across ALL pages even when content overflows */
+  background-image: linear-gradient(180deg, #1e1b4b 0%, #312e81 100%);
+  background-size: 260px 100%;
+  background-repeat: repeat-y;
+  background-position: left top;
 }
 
 /* Sidebar */
@@ -14,6 +20,7 @@
   background: linear-gradient(180deg, #1e1b4b 0%, #312e81 100%);
   color: #e0e0ff;
   padding: 36px 24px;
+  min-height: 100%;
 }
 
 .hr-avatar {
@@ -375,6 +382,7 @@
 /* Uses base styles */
 
 /* Template 2: Teal */
+.hr-resume.template-2 { background-image: linear-gradient(180deg, #134e4a 0%, #0f766e 100%); }
 .hr-resume.template-2 .hr-sidebar { background: linear-gradient(180deg, #134e4a 0%, #0f766e 100%); }
 .hr-resume.template-2 .hr-avatar { background: linear-gradient(135deg, #2dd4bf, #0d9488); }
 .hr-resume.template-2 .hr-skill-fill { background: linear-gradient(90deg, #2dd4bf, #14b8a6); }
@@ -387,6 +395,7 @@
 .hr-resume.template-2 .hr-cert-item::before { color: #2dd4bf; }
 
 /* Template 3: Elegant Purple */
+.hr-resume.template-3 { background-image: linear-gradient(180deg, #3b0764 0%, #581c87 100%); }
 .hr-resume.template-3 .hr-sidebar { background: linear-gradient(180deg, #3b0764 0%, #581c87 100%); }
 .hr-resume.template-3 .hr-avatar { background: linear-gradient(135deg, #c084fc, #9333ea); }
 .hr-resume.template-3 .hr-skill-fill { background: linear-gradient(90deg, #c084fc, #a855f7); }
@@ -399,6 +408,7 @@
 .hr-resume.template-3 .hr-cert-item::before { color: #c084fc; }
 
 /* Template 4: Forest Green */
+.hr-resume.template-4 { background-image: linear-gradient(180deg, #064e3b 0%, #14532d 100%); }
 .hr-resume.template-4 .hr-sidebar { background: linear-gradient(180deg, #064e3b 0%, #14532d 100%); }
 .hr-resume.template-4 .hr-avatar { background: linear-gradient(135deg, #4ade80, #16a34a); }
 .hr-resume.template-4 .hr-skill-fill { background: linear-gradient(90deg, #4ade80, #22c55e); }
@@ -411,6 +421,7 @@
 .hr-resume.template-4 .hr-cert-item::before { color: #4ade80; }
 
 /* Template 5: Crimson/Ruby */
+.hr-resume.template-5 { background-image: linear-gradient(180deg, #4c0519 0%, #881337 100%); }
 .hr-resume.template-5 .hr-sidebar { background: linear-gradient(180deg, #4c0519 0%, #881337 100%); }
 .hr-resume.template-5 .hr-avatar { background: linear-gradient(135deg, #fb7185, #e11d48); }
 .hr-resume.template-5 .hr-skill-fill { background: linear-gradient(90deg, #fb7185, #f43f5e); }
@@ -423,7 +434,7 @@
 .hr-resume.template-5 .hr-cert-item::before { color: #fb7185; }
 
 /* Template 6: Right Sidebar (Default Colors) */
-.hr-resume.template-6 { grid-template-columns: 1fr 260px; }
+.hr-resume.template-6 { grid-template-columns: 1fr 260px; background-position: right top; background-size: 260px 100%; }
 .hr-resume.template-6 .hr-main { grid-column: 1; grid-row: 1; }
 .hr-resume.template-6 .hr-sidebar { grid-column: 2; grid-row: 1; border-left: 1px solid #eee; }
 
@@ -439,6 +450,7 @@
 .hr-resume.template-7 .hr-project-tech { color: #a5b4fc; }
 
 /* Template 8: Monochrome */
+.hr-resume.template-8 { background-image: none; background-color: #1a1a1a; background-size: 260px 100%; background-repeat: repeat-y; background-position: left top; background-clip: content-box; }
 .hr-resume.template-8 .hr-sidebar { background: #1a1a1a; }
 .hr-resume.template-8 .hr-avatar { background: #333; border-color: #666; }
 .hr-resume.template-8 .hr-skill-fill { background: #ccc; }
@@ -453,6 +465,7 @@
 .hr-resume.template-8 .hr-sidebar-title { color: #ccc; }
 
 /* Template 9: Ocean Blue */
+.hr-resume.template-9 { background-image: linear-gradient(180deg, #082f49 0%, #0369a1 100%); }
 .hr-resume.template-9 .hr-sidebar { background: linear-gradient(180deg, #082f49 0%, #0369a1 100%); }
 .hr-resume.template-9 .hr-avatar { background: linear-gradient(135deg, #38bdf8, #0284c7); }
 .hr-resume.template-9 .hr-skill-fill { background: linear-gradient(90deg, #38bdf8, #0ea5e9); }
@@ -465,7 +478,7 @@
 .hr-resume.template-9 .hr-cert-item::before { color: #38bdf8; }
 
 /* Template 10: Right Sidebar Teal */
-.hr-resume.template-10 { grid-template-columns: 1fr 260px; }
+.hr-resume.template-10 { grid-template-columns: 1fr 260px; background-image: linear-gradient(180deg, #134e4a 0%, #0f766e 100%); background-position: right top; background-size: 260px 100%; }
 .hr-resume.template-10 .hr-main { grid-column: 1; grid-row: 1; }
 .hr-resume.template-10 .hr-sidebar { grid-column: 2; grid-row: 1; background: linear-gradient(180deg, #134e4a 0%, #0f766e 100%); }
 .hr-resume.template-10 .hr-avatar { background: linear-gradient(135deg, #2dd4bf, #0d9488); }
